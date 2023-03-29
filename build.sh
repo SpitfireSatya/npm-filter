@@ -28,7 +28,9 @@ source $HOME/.cargo/env
 
 pip3 install --upgrade setuptools setuptools_rust wheel
 
-npm install -g jest mocha tap ava nyc yarn next
+npm install -g jest mocha tap ava nyc yarn next typescript @angular/cli yarn
+
+SHELL ["/bin/bash", "--login", "-c"]
 
 echo "export PATH=/home/codeql_home/codeql:$PATH" >> /root/.bashrc
 echo "alias python=python3" >> /root/.bashrc

@@ -19,8 +19,8 @@ docker run -v type=bind,source="$SOURCE",destination=/mount \
                    --memory="${RAM}g" \
                    -w /home/npm-filter \
                    --rm \
-                   emarteca/npm-filter:latest \
-                   bash -c "python3 src/diagnose_github_repo.py --repo_link $repo_link --config results/config.json --output_dir results"
+                   custom-npm-filter:test1 \
+                   bash -ic "python3 src/diagnose_github_repo.py --repo_link $repo_link --config results/config.json --output_dir results"
 
 rm -r "local_mount_$RANDOM"
 

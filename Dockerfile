@@ -10,10 +10,8 @@ RUN pip3 install bs4 scrapy
 
 SHELL ["/bin/bash", "--login", "-i", "-c"]
 RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
-RUN source /root/.bashrc && nvm install 18.15.0
-RUN nvm use 18.15.0
-
-RUN npm install -g typescript @angular/cli
+RUN source /root/.bashrc && nvm install 16.20.0
+RUN nvm use 16.20.0
 
 RUN mkdir -p /home/npm-filter/results
 
