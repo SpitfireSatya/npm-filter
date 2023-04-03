@@ -34,4 +34,5 @@ NUM_CONTAINERS=$(echo "scale=0; $MIN_VALUE-1" | bc)
 
 nohup parallel -j $NUM_CONTAINERS -a $repo_link_file --timeout 600 --joblog job.log ./runSingleGitRepoResourceConstrainedDocker.sh {} $DOCKER_CPUS $DOCKER_RAM
 
+$(rm -r local_mount_*)
 rm npm_filter_parallel_docker_results/config.json

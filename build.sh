@@ -16,7 +16,7 @@ unzip codeql-linux64.zip
 git clone https://github.com/github/codeql.git --branch v1.26.0 codeql-repo
 
 apt -y install curl dirmngr apt-transport-https lsb-release ca-certificates gnupg build-essential
-curl -sL https://deb.nodesource.com/setup_12.x | bash -
+# curl -sL https://deb.nodesource.com/setup_12.x | bash -
 apt-get update
 
 curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
@@ -28,7 +28,7 @@ source $HOME/.cargo/env
 
 pip3 install --upgrade setuptools setuptools_rust wheel
 
-npm install -g jest mocha tap ava nyc yarn next typescript @angular/cli yarn
+npm install -g jest mocha tap ava nyc yarn next typescript @angular/cli webpack-cli yarn
 
 SHELL ["/bin/bash", "--login", "-c"]
 
