@@ -127,6 +127,16 @@ def get_repos_with_test_infras(json_files):
                     repos_with_tests.append(json_obj)
     return(repos_with_tests)
 
+def get_repos_with_available_test(json_files):
+    repos_with_available_tests = []
+    for json_obj in json_files:
+        if 'testing' in json_obj:
+            if 'test' in json_obj['testing']:
+                if 'num_passing' in json_obj['testing']['test'] or \
+                    'num_failing' in json_obj['testing']['test']:
+                    repos_with_available_tests.append(json_obj)
+    return repos_with_available_tests
+
 def extract_repos_with_runnable_tests(args):
     json_files = get_json_files(args)
     repo_cloning_ERROR_list, pkg_json_ERROR_list = get_setup_erroroneous_repos(json_files)
@@ -135,11 +145,12 @@ def extract_repos_with_runnable_tests(args):
     empty_test_suite_list = get_repos_with_no_test_suites(json_files)
     unrunnable_test_repos = get_repos_with_unrunnable_tests(json_files)
     repos_with_linting_test_only_list = get_repos_with_linting_test_only(json_files)
+    repos_with_available_tests = get_repos_with_available_test(json_files)
 
     repos_with_tests_directory = args.framework+"_repos_with_runnable_tests/"
     if not os.path.exists(repos_with_tests_directory):
         os.makedirs(repos_with_tests_directory)
-    repos_with_tests = list(convert_json_list_to_set(json_files) - \
+    repos_with_tests = list(convert_json_list_to_set(repos_with_available_tests) - \
                     convert_json_list_to_set(repo_cloning_ERROR_list) - \
                     convert_json_list_to_set(pkg_json_ERROR_list) - \
                     convert_json_list_to_set(build_ERROR_list) - \
@@ -147,6 +158,7 @@ def extract_repos_with_runnable_tests(args):
                     convert_json_list_to_set(empty_test_suite_list) - \
                     convert_json_list_to_set(unrunnable_test_repos) - \
                     convert_json_list_to_set(repos_with_linting_test_only_list))
+                    
     for obj in repos_with_tests:
         try:
             obj = json.loads(obj)
